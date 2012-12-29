@@ -5,7 +5,6 @@
 {-- TODO
   o do a traversable example
   o do it with a gadt
-  o conquer world
 --}
 
 {-- GADT TEST: 
