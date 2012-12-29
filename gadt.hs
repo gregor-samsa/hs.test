@@ -1,12 +1,6 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE RankNTypes #-}
 
-
-{-- TODO
-  o do a traversable example
-  o do it with a gadt
---}
-
 {-- GADT TEST: 
     from "Fun with Phantom Types" - http://www.cs.ox.ac.uk/ralf.hinze/publications/With.pdf
     code translated to gadt syntax 
@@ -144,18 +138,5 @@ eval (PpDate p d) = d
 data AnyExpr where 
     AnyExpr :: Expr a -> AnyExpr
 
-
--- existential type - i can show it
-data TG3 where
-  MkTG3 :: Show a => a -> TG3
-
-instance Show TG3 where
-  show (MkTG3 s) = show s     
-
-xs :: [TG3]
-xs = [MkTG3 5, MkTG3 'Z', MkTG3 3.14, MkTG3 False]
-
-{--
---}
 
 main = print "Hello World!"
