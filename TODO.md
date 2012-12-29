@@ -10,5 +10,5 @@
 + Cabal project
 
 # Done
-- do a traversable example
-- do it with a gadt
+- ✓ do a traversable example
+- ✓ do it with a gadt
