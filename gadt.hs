@@ -1,5 +1,5 @@
 {-# LANGUAGE GADTs, ExistentialQuantification #-}
-{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE RankNTypes, EmptyDataDecls #-}
 
 import Text.PrettyPrint.Leijen hiding (pretty, list)
 

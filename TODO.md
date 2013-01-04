@@ -10,9 +10,10 @@
 + Make a film roll
 
 # Build
-+ Cabal project
++ Add some basic tests
 
 # Done
 - ✓ do a traversable example
 - ✓ do it with a gadt
 - ✓ Proplist in the gadt
+- ✓ Cabal project

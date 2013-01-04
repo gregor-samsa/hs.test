@@ -1,0 +1,14 @@
+Name:                hs-test
+Version:             0.1
+Description:         Haskell Test
+License:             BSD3
+License-file:        LICENSE
+Author:              Gregor Samsa
+Maintainer:          gregor.samsa@some.email
+Build-Type:          Simple
+Cabal-Version:       >=1.10
+tested-with:         GHC == 7.6.1
+Executable hs-test
+  default-language:  Haskell2010
+  Main-is:           gadt.hs
+  Build-Depends:     base, wl-pprint
