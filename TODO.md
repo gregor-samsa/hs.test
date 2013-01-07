@@ -1,5 +1,7 @@
 
-# Odds & Ends
++ Proplist in the gadt
+
+# Misc
 + Add a filter to existing example - eg. `where` Name eq "Richard"
 
 # Features
@@ -15,5 +17,4 @@
 # Done
 - ✓ do a traversable example
 - ✓ do it with a gadt
-- ✓ Proplist in the gadt
 - ✓ Cabal project

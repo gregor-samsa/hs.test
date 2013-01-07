@@ -9,17 +9,15 @@ type family F (a :: Basica) :: *
 type instance F BInt  = Int
 type instance F BChar = Char
 
--- data TestF :: F * -> * where -- doesn't work, type synonyms can't be promoted
 data TestF :: * -> * where
   TInt  :: TestF (F BInt)
   TChar :: TestF (F BChar)
 
-data Nat = Ze | Su Nat
+-- --
 
-data Vec :: * -> Nat -> * where
-  Nil  :: Vec a Ze
-  Cons :: a -> Vec a n -> Vec a (Su n)
 
+-- this works (7.6.1) but isn't very useful, GADTs can't be promoted
+--  http://www.cis.upenn.edu/~eir/papers/2012/singletons/paper.pdf
 data Type t where
   RInt    :: Type Int
   RChar   :: Type Char
