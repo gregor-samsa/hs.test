@@ -27,10 +27,9 @@ type instance CamFam Canon Rebel = Int
 type instance CamFam Panasonic (EOS :: CameraModelsCanon) = Char
 type instance CamFam Panasonic (Gf1 :: CameraModelsPanasonic) = Int
 
-data Camera :: * -> * where
-  PanasonicGf1 :: Camera (CamFam Panasonic Gf1)--   :: CameraModelsPanasonic)
-  PanasonicGf2 :: Camera (CamFam Panasonic Gf2)--   :: CameraModelsPanasonic)
-  CanonRebel   :: Camera (CamFam Canon     Rebel) -- :: CameraModelsCanon)
+data Camera :: CameraMakes -> * -> * where
+  CPanasonic :: Camera Panasonic CameraModelsPanasonic --   :: CameraModelsPanasonic)
+  CCanon     :: Camera Canon     CameraModelsCanon -- :: CameraModelsCanon)
 {--
 --}
 
