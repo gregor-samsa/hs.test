@@ -1,6 +1,11 @@
 
 + Proplist in the gadt
 
+# Records
++ How to project a record using a String eg.
+  + project "field1" rec
+      + project :: String -> (FieldType -> FieldType) -> Rec -> Maybe FieldType
+
 # Misc
 + Add a filter to existing example - eg. `where` Name eq "Richard"
 
