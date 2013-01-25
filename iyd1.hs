@@ -1,5 +1,7 @@
 {-# LANGUAGE GADTs, StandaloneDeriving #-}
+{-# LANGUAGE GADTs, ExistentialQuantification #-}
 {-# LANGUAGE KindSignatures, DataKinds #-}
+{-# LANGUAGE RankNTypes, EmptyDataDecls #-}
 
 data CameraMake = 
     LeicaT
@@ -35,21 +37,35 @@ data Camera :: CameraMake -> * where
   Nikon :: Int -> NikonModel -> Camera NikonT
 deriving instance Show (Camera a)
 
-data Exif = Exif
-    deriving Show
-
-data Rep :: * -> * where
-  RInt  :: Int -> Rep Int
-  RChar :: Int -> Rep Char
-  ExifManufacturer :: String -> Rep Exif
-  ExifModel        :: String -> Rep Exif 
-  ExifOrientation  :: String -> Rep Exif
-  ExifIsoSpeed     :: Int -> Rep Exif
-  ExifList         :: [Rep Exif] -> Rep [Exif]
-deriving instance Show (Rep a)
-
-
 showCamera (Leica m) = show m
 showCamera (Canon m) = show m
 showCamera (Nikon n m) = show m ++ show n
+
+data Exif = Exif
+    deriving Show
+
+-- TODO: make it tagless
+data Rep :: * -> * where
+  RInt    :: Int -> Rep Int
+  RChar   :: Int -> Rep Char
+  RString :: [Char] -> Rep String
+  ExifManufacturer :: String -> Rep Exif
+  ExifModel        :: Rep String -> Rep Exif 
+  ExifOrientation  :: Rep String -> Rep Exif
+  ExifIsoSpeed     :: Rep Int -> Rep Exif
+  ExifList         :: [Rep Exif] -> Rep [Exif]
+deriving instance Show (Rep a)
+
+showRep :: forall a. Rep a -> String
+showRep (RInt i)    = show i
+showRep (RChar c)   = show c
+showRep (RString s) = show s
+showRep (ExifManufacturer m) = showRep (RString m)
+showRep (ExifModel m)        = showRep m
+showRep (ExifOrientation m)  = showRep m
+showRep (ExifIsoSpeed m)     = showRep m
+showRep (ExifList (a:l))     = showRep a ++ showRep (ExifList l) 
+showRep (ExifList [])        = ""
+
+t = showRep (ExifList [ExifModel (RString "HI"), ExifIsoSpeed (RInt 3)])
 
