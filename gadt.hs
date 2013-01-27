@@ -31,7 +31,12 @@ data Type t where
   RProp   :: Type Property
 --  RSList  :: Type (HList (Type a))
 
-data Dynamic = forall t. Show t => Dyn (Type t) t
+data Dynamic where 
+  Dyn :: (Show t) => Type t -> t -> Dynamic 
+
+--data Dynamic = forall t. Show t => Dyn (Type t) t
+
+-- pretty (RList RDyn) [Dyn RInt 60,Dyn rString "Bird"]
 -- pretty (RList RDyn) [Dyn RInt 60,Dyn rString "Bird"]
 
 data Property =
