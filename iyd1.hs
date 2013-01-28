@@ -1,13 +1,13 @@
 {-# LANGUAGE GADTs, StandaloneDeriving, KindSignatures #-}
 
-data Exif1 :: * -> * where
-  Manufacturer  :: Exif1 String
-  Model         :: Exif1 String
-  Orientation   :: Exif1 String
-  IsoSpeed      :: Exif1 Int
-  Field         :: Exif1 Dynamic
+data Exif :: * -> * where
+  Manufacturer  :: Exif String
+  Model         :: Exif String
+  Orientation   :: Exif String
+  IsoSpeed      :: Exif Int
+  Field         :: Exif Dynamic
 
-type ExifFieldList = [Exif1 Dynamic]
+type ExifFieldList = [Exif Dynamic]
 
 -- TRep - tagless representation type
 data TRep :: * -> * where
