@@ -10,17 +10,31 @@ data Exif :: * -> * where
   Field         :: (Show t) => Exif t -> t -> Exif Field 
 deriving instance Show (Exif a)
 
--- ImageFile (an image file with Exif)
-data ImageFile :: * -> * where
-  ExifList  :: ImageFile [(Exif Field)] 
-deriving instance Show (ImageFile a)
+type ExifProperties = [Exif Field]
+type FileName = String
+type FileDirectory = String
+
+data SimpleFile where
+  SimpleFileC :: FileName -> FileDirectory -> SimpleFile
+  deriving Show 
+ 
+data File :: * where -- don't seem to need a gadt/phantom
+  ImageFile    :: SimpleFile -> ExifProperties -> File
+  DefaultFile  :: SimpleFile -> File
+  deriving Show 
+
+{--
+  type Files = [File]
+  import :: Directory -> Files
+  import d = 
+    some pipe filter...
+
+  query :: Files -> Query -> Files
+  query fs q = fold fs q
+--}
 
 -- test
-data Dynamic where 
-  Dyn :: (Show t) => ImageFile t -> t -> Dynamic 
-deriving instance Show Dynamic
-
 f = Field Manufacturer "GF1"
-flist = Dyn ExifList [f,f,f]
-
-
+flist = [f,f,f]
+simple = SimpleFileC "File" "Dir"
+image = ImageFile simple flist

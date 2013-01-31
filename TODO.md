@@ -1,10 +1,7 @@
 
-+ Proplist in the gadt
-
-# Records
-+ How to project a record using a String eg.
-  + project "field1" rec
-      + project :: String -> (FieldType -> FieldType) -> Rec -> Maybe FieldType
+# short term
++ import files (use pipes)
++ query by tag
 
 # Misc
 + Add a filter to existing example - eg. `where` Name eq "Richard"
@@ -20,6 +17,12 @@
 + Add some basic tests
 
 # Done
-- ✓ do a traversable example
-- ✓ do it with a gadt
-- ✓ Cabal project
+- do a traversable example
+- do it with a gadt
+- Cabal project
+- Proplist in the gadt
+- Records
+    - just use a simple gadt for now
+      x How to project a record using a String eg.
+      x project "field1" rec
+        x project :: String -> (FieldType -> FieldType) -> Rec -> Maybe FieldType
