@@ -2,6 +2,7 @@
 import System.Environment
 import System.Directory
 import System.FilePath.Find
+import System.FilePath.Posix as FilePath
 
 data Field
 
@@ -15,10 +16,11 @@ deriving instance Show (Exif a)
 
 type ExifProperties = [Exif Field]
 type FileName = String
+type FileExtension = String
 type FileDirectory = String
 
 data SimpleFile where
-  SimpleFileC :: FileName -> FileDirectory -> SimpleFile
+  SimpleFileC :: FileName -> FileDirectory -> FileExtension -> SimpleFile
   deriving Show 
  
 data File :: * where -- don't seem to need a gadt/phantom
@@ -37,15 +39,17 @@ data File :: * where -- don't seem to need a gadt/phantom
 --}
  
 search pat dir = find always (fileName ~~? pat) dir
+
+printFileMeta f =
+  let (path, name) = FilePath.splitFileName f in
+  let ext = FilePath.takeExtension f in
+  let defaultf = DefaultFile (SimpleFileC name path f) in
+  putStrLn (show defaultf)
  
 main = do [pat] <- getArgs
           dir   <- getCurrentDirectory
           files <- search pat dir
-          mapM_ putStrLn files
-
+          mapM_ printFileMeta files
 
 -- test
-f = Field Manufacturer "GF1"
-flist = [f,f,f]
-simple = SimpleFileC "File" "Dir"
-image = ImageFile simple flist
+test = withArgs ["*"] main
