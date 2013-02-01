@@ -1,4 +1,7 @@
 {-# LANGUAGE GADTs, StandaloneDeriving, KindSignatures #-}
+import System.Environment
+import System.Directory
+import System.FilePath.Find
 
 data Field
 
@@ -32,6 +35,14 @@ data File :: * where -- don't seem to need a gadt/phantom
   query :: Files -> Query -> Files
   query fs q = fold fs q
 --}
+ 
+search pat dir = find always (fileName ~~? pat) dir
+ 
+main = do [pat] <- getArgs
+          dir   <- getCurrentDirectory
+          files <- search pat dir
+          mapM_ putStrLn files
+
 
 -- test
 f = Field Manufacturer "GF1"

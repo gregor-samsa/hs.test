@@ -10,5 +10,5 @@ Cabal-Version:       >=1.10
 tested-with:         GHC == 7.6.1
 Executable hs-test
   default-language:  Haskell2010
-  Main-is:           gadt.hs
-  Build-Depends:     base, wl-pprint
+  Main-is:           iyd1.hs
+  Build-Depends:     base, wl-pprint, filemanip, directory
