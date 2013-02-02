@@ -11,4 +11,4 @@ tested-with:         GHC == 7.6.1
 Executable hs-test
   default-language:  Haskell2010
   Main-is:           iyd1.hs
-  Build-Depends:     base, wl-pprint, filemanip, filepath, directory
+  Build-Depends:     base, wl-pprint, filemanip, filepath, directory, exif, filemanip
